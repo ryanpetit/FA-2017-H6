@@ -39,6 +39,7 @@ public class RecipeSearchAsyncTask extends AsyncTask<String, String, RecipeList>
 
         try {
             response = client.newCall(request).execute();
+            String myString = "ignore me";
             if (response != null) {
                 return RecipeParser.recipeListFromJson(response.body().string()); }
         } catch (IOException e) {
