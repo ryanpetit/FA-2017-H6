@@ -13,4 +13,19 @@ public class RecipeList {
         return recipes;
     }
 
+    public static class Builder {
+        private RecipeList recipeList;
+
+        public Builder() { recipeList = new RecipeList(); }
+
+        public Builder recipes(ArrayList<Recipe> recipeArrayList) {
+            recipeList.recipes = recipeArrayList;
+            return this;
+        }
+        public RecipeList build() {
+            RecipeList list = this.recipeList;
+            recipeList = null;
+            return list;
+        }
+    }
 }
