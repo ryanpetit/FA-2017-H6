@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,7 +18,7 @@ import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView {
 
     // Butterknife used to bind view elements
     @BindView(R.id.my_search_button)
@@ -61,4 +62,10 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void displayResult(Recipe recipe){
+
+    }
+
 }
