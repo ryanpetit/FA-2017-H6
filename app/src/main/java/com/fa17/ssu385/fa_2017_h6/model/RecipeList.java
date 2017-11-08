@@ -9,6 +9,26 @@ public class RecipeList {
     @SerializedName("matches")
     private ArrayList<Recipe> recipes;
 
+    public static class Builder{
+        private RecipeList recipeList;
+
+        Builder(){
+            recipeList = new RecipeList();
+        }
+
+        public Builder recipes(ArrayList<Recipe> recipes){
+            recipeList.recipes = recipes;
+            return this;
+        }
+
+        public RecipeList build(){
+            RecipeList val = recipeList;
+            recipeList = null;
+            return val;
+        }
+
+    }
+
     public ArrayList<Recipe> getRecipes() {
         return recipes;
     }
