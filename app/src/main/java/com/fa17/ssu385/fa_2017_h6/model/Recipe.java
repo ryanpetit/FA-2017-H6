@@ -21,6 +21,9 @@ public class Recipe {
     @SerializedName("smallImageUrls")
     private ArrayList<String> thumbnailSources;
 
+    @SerializedName("totalTimeInSeconds")
+    private String timeInSeconds;
+
     public String getName() {
         return name;
     }
@@ -31,6 +34,10 @@ public class Recipe {
 
     public String getRecipeId() {
         return recipeId;
+    }
+
+    public String getTimeInSeconds() {
+        return timeInSeconds;
     }
 
     public ArrayList<String> getIngredients() {
@@ -55,6 +62,11 @@ public class Recipe {
 
         public Builder source(String source) {
             recipe.source = source;
+            return this;
+        }
+
+        public Builder timeInSeconds(String timeInSeconds) {
+            recipe.timeInSeconds = timeInSeconds;
             return this;
         }
 
