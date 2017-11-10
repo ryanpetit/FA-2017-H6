@@ -1,6 +1,7 @@
 package com.fa17.ssu385.fa_2017_h6.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.squareup.okhttp.HttpUrl;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,9 @@ public class Recipe {
 
     @SerializedName("smallImageUrls")
     private ArrayList<String> thumbnailSources;
+
+    @SerializedName("totalTimeInSeconds")
+    private Integer totalTimeInSeconds;
 
     public String getName() {
         return name;
@@ -46,6 +50,11 @@ public class Recipe {
 
         public Builder() {
             recipe = new Recipe();
+        }
+
+        public Builder totalTimeInSeconds(Integer totalTime){
+            recipe.totalTimeInSeconds = totalTime;
+            return this;
         }
 
         public Builder name(String name) {
