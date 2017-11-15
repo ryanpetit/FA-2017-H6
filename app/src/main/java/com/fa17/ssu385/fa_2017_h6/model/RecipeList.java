@@ -1,8 +1,11 @@
 package com.fa17.ssu385.fa_2017_h6.model;
 
+
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class RecipeList {
@@ -11,6 +14,23 @@ public class RecipeList {
 
     public ArrayList<Recipe> getRecipes() {
         return recipes;
+    }
+
+    public static class Builder{
+        private RecipeList recipeList;
+
+        public Builder(){ recipeList = new RecipeList();}
+
+        public Builder recipes(ArrayList<Recipe> recipes){
+            recipeList.recipes = recipes;
+            return this;
+        }
+
+        public RecipeList build(){
+            RecipeList val = this.recipeList;
+            recipeList = null;
+            return val;
+        }
     }
 
 }
