@@ -2,6 +2,7 @@ package com.fa17.ssu385.fa_2017_h6.ui.search;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
