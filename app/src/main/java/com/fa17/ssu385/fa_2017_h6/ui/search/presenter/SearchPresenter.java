@@ -1,5 +1,6 @@
 package com.fa17.ssu385.fa_2017_h6.ui.search.presenter;
 
+import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
 import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
 
@@ -11,8 +12,17 @@ public class SearchPresenter {
     private SearchView view;
     private RecipeSearchInteractor interactor;
 
-    SearchPresenter(SearchView _view, RecipeSearchInteractor _interactor) {
-        view = _view;
-        interactor = _interactor;
+    public SearchPresenter(SearchView _view, RecipeSearchInteractor _interactor) {
+        this.view = _view;
+        this.interactor = _interactor;
+    }
+
+    public void getResults(String keywords) {
+        interactor.getRecipe(keywords, new RecipeSearchInteractor.OnSearchResponse() {
+            @Override
+            public void callback(Recipe recipe) {
+
+            }
+        });
     }
 }
