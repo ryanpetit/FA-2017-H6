@@ -2,7 +2,7 @@ package com.fa17.ssu385.fa_2017_h6.ui.search;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchActivity extends AppCompatActivity implements SearchView {
+
+    private RecipeSearchInteractor interactor;
+    private SearchPresenter presenter;
 
     // Butterknife used to bind view elements
     @BindView(R.id.my_search_button)
@@ -40,32 +43,27 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
 
+        RecipeSearchInteractorMockImpl mock = new RecipeSearchInteractorMockImpl();
+
+        interactor = new RecipeSearchInteractorImpl();
+//        presenter = new SearchPresenter(this, interactor);
+
+        presenter = new SearchPresenter(this, mock);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
-
-                task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
-                    @Override
-                    public void onCallback(RecipeList recipeList) {
-                        Recipe result = recipeList.getRecipes().get(0);
-
-                        Glide.with(SearchActivity.this)
-                                .load(result.getThumbnailSources().get(0))
-                                .into(recipeThumbnail);
-
-                        recipeName.setText(result.getName());
-                    }
-                });
-
-                task.execute(searchInput.getText().toString());
+                presenter.getResults(searchInput.getEditableText().toString());
             }
         });
     }
 
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        // empty
+    public void displayResult(Recipe recipe) {
+        recipeName.setText(recipe.getName());
+        Glide.with(this)
+                .load(recipe.getThumbnailSources().get(0))
+                .into(recipeThumbnail);
+        Log.d("DEBUG", "here");
     }
 }
