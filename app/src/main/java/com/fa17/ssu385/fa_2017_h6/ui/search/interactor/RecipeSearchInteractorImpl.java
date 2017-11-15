@@ -1,6 +1,11 @@
 package com.fa17.ssu385.fa_2017_h6.ui.search.interactor;
 
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
+import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
+
+
+
 
 /**
  * Created by ssubrandon on 11/14/17.
@@ -8,7 +13,16 @@ import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 
 public class RecipeSearchInteractorImpl implements RecipeSearchInteractor {
     public void getRecipe(String s, OnSearchResponse on){
-        //leave empty
+                RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
+
+                task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
+                    @Override
+                    public void onCallback(RecipeList recipeList) {
+                        Recipe recipeObject = recipeList.getRecipes().get(0);
+                    }
+                });
+
+                task.execute(searchInput.getText().toString());
     }
     private OnSearchResponse responseListener;
 
