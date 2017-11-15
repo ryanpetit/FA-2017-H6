@@ -58,8 +58,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
                         recipeName.setText(result.getName());
                     }
                 });
-
                 task.execute(searchInput.getText().toString());
+
             }
         });
     }
