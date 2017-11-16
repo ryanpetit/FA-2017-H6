@@ -7,5 +7,5 @@ import com.fa17.ssu385.fa_2017_h6.model.Recipe;
  */
 
 public interface SearchView {
-    public void displayResult(Recipe recipe);
+    void displayResult(Recipe recipe);
 }

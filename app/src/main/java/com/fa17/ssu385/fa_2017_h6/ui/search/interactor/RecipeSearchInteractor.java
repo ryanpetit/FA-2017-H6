@@ -8,9 +8,9 @@ import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 
 public interface RecipeSearchInteractor {
 
-    public void getRecipe(String string, OnSearchResponse listener);
+    void getRecipe(String string, OnSearchResponse listener);
 
     public interface OnSearchResponse {
-        public void callback(Recipe recipe);
+        void callback(Recipe recipe);
     }
 }
