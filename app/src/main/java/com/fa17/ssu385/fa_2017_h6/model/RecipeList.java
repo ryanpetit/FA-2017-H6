@@ -13,8 +13,6 @@ public class RecipeList {
         return recipes;
     }
 
-
-
     public static class Builder {
         private RecipeList recipeList;
 
@@ -32,6 +30,5 @@ public class RecipeList {
         }
 
     }
-
 
 }

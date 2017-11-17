@@ -44,7 +44,9 @@ public class Recipe {
         return thumbnailSources;
     }
 
-    public String getTotalTimeInSeconds () {return totalTimeInSeconds;}
+    public String getTotalTimeInSeconds() {
+        return totalTimeInSeconds;
+    }
 
     public static class Builder {
         private Recipe recipe;
@@ -89,4 +91,5 @@ public class Recipe {
             return val;
         }
     }
+
 }

@@ -13,6 +13,7 @@ import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.ui.search.presenter.SearchPresenter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
 
 import butterknife.BindView;
@@ -57,8 +58,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
                         recipeName.setText(result.getName());
                     }
                 });
-
                 task.execute(searchInput.getText().toString());
+
             }
         });
     }
