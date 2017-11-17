@@ -15,6 +15,7 @@ import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorImpl;
+import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorMockImpl;
 import com.fa17.ssu385.fa_2017_h6.ui.search.presenter.SearchPresenter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
 
@@ -36,7 +37,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     @BindView(R.id.recipe_name)
     public TextView recipeName;
 
-    private RecipeSearchInteractor interactor;
+    private RecipeSearchInteractorMockImpl mInteractor;
+    //private RecipeSearchInteractor interactor;
     private SearchPresenter presenter;
 
     @Override
@@ -46,8 +48,11 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
 
-        interactor = new RecipeSearchInteractorImpl();
-        presenter = new SearchPresenter(this, interactor);
+
+        mInteractor = new RecipeSearchInteractorMockImpl();
+        //interactor = new RecipeSearchInteractorImpl();
+       // presenter = new SearchPresenter(this, interactor);
+        presenter = new SearchPresenter(this, mInteractor);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +66,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     @Override
     public void displayResult(Recipe recipe) {
-
-        recipeName = (TextView)findViewById(R.id.recipe_name);
-        recipeThumbnail = (ImageView)findViewById(R.id.recipe_thumbnail);
         recipeName.setText(recipe.getName());
-        Glide.with(this).load(recipe.getThumbnailSources().get(0)).into(recipeThumbnail);
+       // Glide.with(this).load(recipe.getThumbnailSources().get(0)).into(recipeThumbnail);
 
 
     }

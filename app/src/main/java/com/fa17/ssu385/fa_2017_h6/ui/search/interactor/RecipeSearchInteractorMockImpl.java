@@ -4,6 +4,10 @@ import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class RecipeSearchInteractorMockImpl implements RecipeSearchInteractor {
 
     private OnSearchResponse responseListener;
@@ -14,12 +18,10 @@ public class RecipeSearchInteractorMockImpl implements RecipeSearchInteractor {
 
     @Override
     public void getRecipe(String search, final OnSearchResponse searchResponse) {
-
-            @Override
-            public void onCallback(RecipeList recipeList) {
-
-                Recipe recipe = recipeList.getRecipes().get(0);
-                searchResponse.callback(recipe);
-
+        searchResponse.callback(new Recipe.Builder()
+                .recipeId("id")
+                .name("Motha Fuggin Meatballs and Pasta")
+                .build());
     }
 }
+
