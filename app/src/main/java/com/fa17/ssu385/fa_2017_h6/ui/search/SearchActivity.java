@@ -13,12 +13,20 @@ import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
+import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorImpl;
+import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorMockImpl;
+import com.fa17.ssu385.fa_2017_h6.ui.search.presenter.SearchPresenter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchActivity extends AppCompatActivity implements SearchView{
+
+    RecipeSearchInteractor interactor;
+    SearchPresenter presenter;
+    RecipeSearchInteractorMockImpl mockInteractor;
 
     // Butterknife used to bind view elements
     @BindView(R.id.my_search_button)
@@ -40,31 +48,23 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
 
+        mockInteractor = new RecipeSearchInteractorMockImpl();
+
+        interactor = new RecipeSearchInteractorImpl();
+        presenter = new SearchPresenter(this, mockInteractor);
         searchButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
-
-                task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
-                    @Override
-                    public void onCallback(RecipeList recipeList) {
-                        Recipe result = recipeList.getRecipes().get(0);
-
-                        Glide.with(SearchActivity.this)
-                                .load(result.getThumbnailSources().get(0))
-                                .into(recipeThumbnail);
-
-                        recipeName.setText(result.getName());
-                    }
-                });
-
-                task.execute(searchInput.getText().toString());
+                presenter.getResults(searchInput.getText().toString());
             }
         });
     }
 
     @Override
     public void displayResult(Recipe recipe) {
-
+        recipeName.setText(recipe.getName());
+        //Glide.with(this).load(recipe.getThumbnailSources().get(0))
+          //    .into(recipeThumbnail);
     }
 }

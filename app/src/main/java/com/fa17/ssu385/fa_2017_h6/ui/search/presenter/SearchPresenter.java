@@ -12,9 +12,17 @@ public class SearchPresenter {
     private SearchView view;
     private RecipeSearchInteractor interactor;
 
+    public void getResults(String keywords) {
+        interactor.getRecipe(keywords, new RecipeSearchInteractor.OnSearchResponse() {
+            @Override
+            public void callback(Recipe recipe) {
+                view.displayResult(recipe);
+            }
+        });
+    }
+
     public SearchPresenter(SearchView view, RecipeSearchInteractor interactor){
         this.view = view;
         this.interactor = interactor;
-        }
     }
 }
