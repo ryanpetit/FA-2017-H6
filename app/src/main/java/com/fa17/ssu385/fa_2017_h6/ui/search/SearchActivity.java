@@ -32,38 +32,31 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     @BindView(R.id.recipe_name)
     public TextView recipeName;
 
+    private RecipeSearchInteractor interactor;
+    private SearchPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
-
+        interactor = new RecipeSearchInteractorMockImpl();
+        //interactor = new RecipeSearchInteractorImpl();
+        presenter = new SearchPresenter(this, interactor);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
+                presenter.getResults(searchInput.getText().toString());
 
-                task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
-                    @Override
-                    public void onCallback(RecipeList recipeList) {
-                        Recipe result = recipeList.getRecipes().get(0);
-
-                        Glide.with(SearchActivity.this)
-                                .load(result.getThumbnailSources().get(0))
-                                .into(recipeThumbnail);
-
-                        recipeName.setText(result.getName());
-                    }
-                });
-
-                task.execute(searchInput.getText().toString());
             }
         });
     }
 
     @Override
     public void displayResult(Recipe result) {
+        recipeName.setText(result.getName());
+        //Glide.with(this).load(result.getThumbnailSources().get(0)).into(recipeThumbnail);
 
     }
 }
