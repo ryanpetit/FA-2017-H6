@@ -22,7 +22,7 @@ public class Recipe {
     private ArrayList<String> thumbnailSources;
 
     @SerializedName("totalTimeInSeconds")
-    private Integer timeInSeconds;
+    private double timeInSeconds;
 
     public String getName() {
         return name;
@@ -76,7 +76,7 @@ public class Recipe {
             return this;
         }
 
-        public Builder timeInSeconds(Integer timeInSeconds) {
+        public Builder timeInSeconds(double timeInSeconds) {
             recipe.timeInSeconds = timeInSeconds;
             return this;
         }
