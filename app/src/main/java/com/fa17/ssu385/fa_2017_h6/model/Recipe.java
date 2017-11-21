@@ -15,6 +15,9 @@ public class Recipe {
     @SerializedName("id")
     private String recipeId;
 
+    @SerializedName("totalTimeInSeconds")
+    private int totalTime;
+
     @SerializedName("ingredients")
     private ArrayList<String> ingredients;
 
@@ -39,6 +42,10 @@ public class Recipe {
 
     public ArrayList<String> getThumbnailSources() {
         return thumbnailSources;
+    }
+
+    public int getTotalTime() {
+        return totalTime;
     }
 
     public static class Builder {
@@ -77,6 +84,11 @@ public class Recipe {
             Recipe val = this.recipe;
             recipe = null;
             return val;
+        }
+
+        public Builder totalTime(int time) {
+            recipe.totalTime = time;
+            return this;
         }
     }
 

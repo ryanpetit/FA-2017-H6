@@ -13,11 +13,12 @@ import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SearchView {
 
     // Butterknife used to bind view elements
     @BindView(R.id.my_search_button)
@@ -60,5 +61,11 @@ public class SearchActivity extends AppCompatActivity {
                 task.execute(searchInput.getText().toString());
             }
         });
+    }
+
+
+    @Override
+    public void displayResult(Recipe recipe) {
+
     }
 }
