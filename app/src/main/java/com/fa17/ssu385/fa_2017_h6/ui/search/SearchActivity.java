@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 
 public class SearchActivity extends AppCompatActivity implements SearchView {
 
-    // Butterknife used to bind view elements
+    // Butterknife is used to bind view elements
     @BindView(R.id.my_search_button)
     public Button searchButton;
 
@@ -58,7 +58,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
             }
         });
     }
-
+    //Have to make a change to get this to commit...
     @Override
     public void displayResult(Recipe recipe) {
         recipeName.setText(recipe.getName());
