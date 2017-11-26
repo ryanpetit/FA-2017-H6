@@ -13,6 +13,10 @@ import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
+import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorImpl;
+import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorMockImpl;
+import com.fa17.ssu385.fa_2017_h6.ui.search.presenter.SearchPresenter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
 
 import butterknife.BindView;
@@ -33,6 +37,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     @BindView(R.id.recipe_name)
     public TextView recipeName;
 
+    private RecipeSearchInteractor interactor;
+    private SearchPresenter presenter;
+    private RecipeSearchInteractor mockInteractor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +48,19 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
 
+        mockInteractor = new RecipeSearchInteractorMockImpl();
+        interactor = new RecipeSearchInteractorImpl();
+        //presenter = new SearchPresenter(this, interactor);
+        presenter = new SearchPresenter(this, mockInteractor);
+
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                presenter.getResults(searchInput.getText().toString());
+
+                /*
                 RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
 
                 task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
@@ -59,12 +77,15 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
                 });
 
                 task.execute(searchInput.getText().toString());
+                */
             }
         });
     }
 
     @Override
     public void displayResult(Recipe recipe) {
+
+        recipeName.setText(recipe.getName());
 
     }
 }
