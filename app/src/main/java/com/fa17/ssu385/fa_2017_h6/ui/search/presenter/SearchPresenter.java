@@ -23,6 +23,7 @@ public class SearchPresenter {
         interactor.getRecipe(keywords, new RecipeSearchInteractor.OnSearchResponse() {
             @Override
             public void callback(Recipe rec) {
+                view.displayResult(rec);
 
             }
         });
