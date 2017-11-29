@@ -15,6 +15,7 @@ import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorImpl;
+import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorMockImpl;
 import com.fa17.ssu385.fa_2017_h6.ui.search.presenter.SearchPresenter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
 
@@ -45,7 +46,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         setContentView(R.layout.activity_search);
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
-        interactor = new RecipeSearchInteractorImpl();
+        //interactor = new RecipeSearchInteractorImpl();
+        interactor = new RecipeSearchInteractorMockImpl();
         presenter = new SearchPresenter(this, interactor);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +62,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     @Override
     public void displayResult(Recipe recipe) {
-
+        recipeName.setText(recipe.getName());
+        Glide.with(SearchActivity.this)
+                .load(recipe.getThumbnailSources().get(0))
+                .into(recipeThumbnail);
     }
 }
