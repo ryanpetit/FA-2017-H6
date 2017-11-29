@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fa17.ssu385.fa_2017_h6.ui.search.SearchActivity">
+    tools:context="com.fa17.ssu385.fa_2017_h6.ui.search.viewcontroller.SearchActivity">
 
     <LinearLayout
         android:id="@+id/search_widget"

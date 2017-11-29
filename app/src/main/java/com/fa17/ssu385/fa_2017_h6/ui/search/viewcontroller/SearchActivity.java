@@ -1,7 +1,9 @@
-package com.fa17.ssu385.fa_2017_h6.ui.search;
+package com.fa17.ssu385.fa_2017_h6.ui.search.viewcontroller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.ui.search.adapter.RecipeSearchAdapter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorImpl;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorMockImpl;
@@ -39,6 +42,11 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
 
     private RecipeSearchInteractor interactor;
     private SearchPresenter presenter;
+    private RecipeSearchAsyncTask task;
+    private LinearLayoutManager linearLayoutManager;
+    private RecipeSearchAdapter adapter;
+    private RecyclerView recipeResultList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
