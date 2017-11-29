@@ -19,9 +19,9 @@ public class RecipeSearchInteractorMockImpl implements RecipeSearchInteractor {
     @Override
     public void getRecipe(String search, final OnSearchResponse searchResponse) {
         searchResponse.callback(new Recipe.Builder()
-                .recipeId("id")
-                .name("Motha Fuggin Meatballs and Pasta")
-                .build());
+                                    .recipeId("id")
+                                    .name("Motha Fuggin Meatballs and Pasta")
+                                    .build());
     }
 }
 

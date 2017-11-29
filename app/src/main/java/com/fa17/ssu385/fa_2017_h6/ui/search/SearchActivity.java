@@ -2,6 +2,9 @@ package com.fa17.ssu385.fa_2017_h6.ui.search;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +16,7 @@ import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchAdapter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorImpl;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorMockImpl;
@@ -37,22 +41,29 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     @BindView(R.id.recipe_name)
     public TextView recipeName;
 
-    private RecipeSearchInteractorMockImpl mInteractor;
-    //private RecipeSearchInteractor interactor;
+    @BindView(R.id.recipe_result_list)
+    public RecyclerView recipeResultList;
+
+
+    private RecipeSearchInteractor interactor;
     private SearchPresenter presenter;
+    private RecipeSearchAdapter adapter;
+    private LinearLayoutManager linearLayoutManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
 
+        linearLayoutManager = new LinearLayoutManager(this);
+        recipeResultList.setLayoutManager(linearLayoutManager);
 
-        mInteractor = new RecipeSearchInteractorMockImpl();
-        //interactor = new RecipeSearchInteractorImpl();
-       // presenter = new SearchPresenter(this, interactor);
-        presenter = new SearchPresenter(this, mInteractor);
+        interactor = new RecipeSearchInteractorImpl();
+        presenter = new SearchPresenter(this, interactor);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,10 +76,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     }
 
     @Override
-    public void displayResult(Recipe recipe) {
-        recipeName.setText(recipe.getName());
-       // Glide.with(this).load(recipe.getThumbnailSources().get(0)).into(recipeThumbnail);
-
+    public void displayResult(RecipeList recipeList) {
 
     }
 }
