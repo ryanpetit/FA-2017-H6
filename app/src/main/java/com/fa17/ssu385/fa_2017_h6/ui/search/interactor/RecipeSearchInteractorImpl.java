@@ -1,5 +1,11 @@
 package com.fa17.ssu385.fa_2017_h6.ui.search.interactor;
 
+import com.bumptech.glide.Glide;
+import com.fa17.ssu385.fa_2017_h6.model.Recipe;
+import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
+import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.ui.search.SearchActivity;
+
 /**
  * Created by student on 11/28/17.
  */
@@ -17,7 +23,18 @@ public class RecipeSearchInteractorImpl implements RecipeSearchInteractor {
 
     @Override
     public void getRecipe(String string, OnSearchResponse listener) {
-        // Leave empty
+        RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
+        this.setResponseListener(listener);
+
+        task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
+            @Override
+            public void onCallback(RecipeList recipeList) {
+                Recipe recipe = recipeList.getRecipes().get(0);
+                responseListener.callback(recipe);
+            }
+        });
+
+        task.execute(string);
     }
 
 }
