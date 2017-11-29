@@ -1,4 +1,4 @@
-package com.fa17.ssu385.fa_2017_h6.ui.search;
+package com.fa17.ssu385.fa_2017_h6.ui.search.Interactor;
 
 /**
  * Created by hayleygerard on 11/9/17.
