@@ -9,6 +9,6 @@ public class SearchInteractor {
             void callback(Recipe recipe);
         }
 
-        void getRecipe(String recipe, OnSearchResponse onSearchResponse);
+        void getRecipe(String search, OnSearchResponse onSearchResponse);
     }
 }
