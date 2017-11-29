@@ -13,6 +13,7 @@ import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.ui.search.adapter.RecipeSearchAdapter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorImpl;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorMockImpl;
@@ -26,6 +27,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     private RecipeSearchInteractor interactor;
     private SearchPresenter presenter;
     private RecipeSearchInteractorMockImpl mockInteractor;
+    private RecipeSearchAdapter adapter;
 
     // Butterknife used to bind view elements
     @BindView(R.id.my_search_button)
@@ -52,18 +54,20 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
         mockInteractor = new RecipeSearchInteractorMockImpl();
         interactor = new RecipeSearchInteractorImpl();
-        //presenter = new SearchPresenter(this, interactor);
-        presenter = new SearchPresenter(this, mockInteractor);
+        presenter = new SearchPresenter(this, interactor);
+      //  presenter = new SearchPresenter(this, mockInteractor);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.getResults(searchInput.getText().toString());
-                 /*
+
                 RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
                 task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
                     @Override
                     public void onCallback(RecipeList recipeList) {
+                        adapter = new RecipeSearchAdapter(recipeList.getRecipes());
+
                         Recipe result = recipeList.getRecipes().get(0);
                         Glide.with(SearchActivity.this)
                                 .load(result.getThumbnailSources().get(0))
@@ -72,7 +76,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
                     }
                 });
                 task.execute(searchInput.getText().toString());
-                */
+
             }
         });
     }
