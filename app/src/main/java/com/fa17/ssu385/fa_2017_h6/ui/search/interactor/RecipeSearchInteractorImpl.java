@@ -11,11 +11,12 @@ import com.fa17.ssu385.fa_2017_h6.ui.search.SearchActivity;
  */
 
 public class RecipeSearchInteractorImpl implements RecipeSearchInteractor{
+    private  OnSearchResponse responseListener;
+
     public void setResponseListener(OnSearchResponse responseListener) {
         this.responseListener = responseListener;
     }
 
-    private OnSearchResponse responseListener;
 
     @Override
     public void getRecipe(String name, final OnSearchResponse response) {

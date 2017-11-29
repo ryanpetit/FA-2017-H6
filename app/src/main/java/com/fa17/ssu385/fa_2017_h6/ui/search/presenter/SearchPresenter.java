@@ -13,8 +13,8 @@ public class SearchPresenter {
     private RecipeSearchInteractor interactor;
 
     public SearchPresenter(SearchView v, RecipeSearchInteractor i){
-        view = v;
-        interactor = i;
+        this.view = v;
+        this.interactor = i;
     }
 
     public void getResults(String keywords){
