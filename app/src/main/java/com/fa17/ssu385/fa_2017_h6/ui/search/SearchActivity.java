@@ -1,8 +1,8 @@
 package com.fa17.ssu385.fa_2017_h6.ui.search;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,17 +11,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
-import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchAdapter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorImpl;
-import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorMockImpl;
 import com.fa17.ssu385.fa_2017_h6.ui.search.presenter.SearchPresenter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
+
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,14 +34,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     @BindView(R.id.search_input)
     public EditText searchInput;
 
-    @BindView(R.id.recipe_thumbnail)
-    public ImageView recipeThumbnail;
-
-    @BindView(R.id.recipe_name)
-    public TextView recipeName;
-
-    @BindView(R.id.recipe_result_list)
-    public RecyclerView recipeResultList;
+    // @BindView(R.id.recipe_result_list)
+    private RecyclerView recipeResultList;
 
 
     private RecipeSearchInteractor interactor;
@@ -59,6 +52,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
 
+        recipeResultList = (RecyclerView)findViewById(R.id.recipe_result_list);
         linearLayoutManager = new LinearLayoutManager(this);
         recipeResultList.setLayoutManager(linearLayoutManager);
 
@@ -77,6 +71,17 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     @Override
     public void displayResult(RecipeList recipeList) {
+
+        adapter = new RecipeSearchAdapter(recipeList.getRecipes());
+        adapter.setRecipeItemClickListener(new RecipeSearchAdapter.RecipeItemClickListener() {
+            @Override
+            public void onRecipeItemClicked(Recipe selectedItem) {
+                Intent navIntent = new Intent(SearchActivity.this, RecipeDetailActivity.class);
+                navIntent.putExtra(RecipeDetailActivity.RECIPE_EXTRA_KEY, Parcels.wrap(selectedItem));
+                startActivity(navIntent);
+            }
+        });
+        recipeResultList.setAdapter(adapter);
 
     }
 }

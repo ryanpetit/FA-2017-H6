@@ -25,15 +25,15 @@ public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements Vie
 
         recipeName = (TextView)itemView.findViewById(R.id.recipe_name);
         recipeThumbnail = (ImageView)itemView.findViewById(R.id.recipe_thumbnail);
-
-        recipeName.setOnClickListener(this);
-        recipeThumbnail.setOnClickListener(this);
-        sourceDisplayName.setOnClickListener(this);
     }
 
     public void bindView(Recipe item) {
+        recipeName.setOnClickListener(this);
+        recipeThumbnail.setOnClickListener(this);
+        // sourceDisplayName.setOnClickListener(this);
+
         recipeName.setText(item.getName());
-        sourceDisplayName.setText(item.getSource());
+        // sourceDisplayName.setText(item.getSource());
 
         Glide.with(this.itemView)
                 .load(item.getThumbnailSources().get(0))

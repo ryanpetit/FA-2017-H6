@@ -28,15 +28,6 @@ public class RecipeSearchInteractorImpl implements RecipeSearchInteractor {
             @Override
             public void onCallback(RecipeList recipeList) {
 
-                adapter = new RecipeSearchAdapter(recipeList.getRecipes());
-                adapter.setRecipeItemClickListener(new RecipeSearchAdapter.RecipeItemClickListener() {
-                    @Override
-                    public void onRecipeItemClicked(Recipe selectedItem) {
-                        Intent navIntent = new Intent(SearchActivity.class, RecipeDetailActivity.class);
-                        navIntent.putExtra(RecipeDetailActivity.RECIPE_EXTRA_KEY, Parcels.wrap(selectedItem));
-                        startActivity(navIntent);
-                    }
-                });
                 //Recipe recipe = recipeList.getRecipes().get(0);
                 searchResponse.callback(recipeList);
             }
