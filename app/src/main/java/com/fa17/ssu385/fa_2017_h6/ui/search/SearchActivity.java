@@ -13,6 +13,8 @@ import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
+import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +33,8 @@ public class SearchActivity extends AppCompatActivity {
 
     @BindView(R.id.recipe_name)
     public TextView recipeName;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,4 +65,11 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+    SearchView searchview = new SearchView() {
+        @Override
+        public void displayResult(Recipe recipe) {
+
+        }
+    };
+
 }
