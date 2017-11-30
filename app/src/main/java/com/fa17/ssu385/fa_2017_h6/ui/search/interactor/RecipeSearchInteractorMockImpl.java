@@ -18,13 +18,13 @@ public class RecipeSearchInteractorMockImpl implements RecipeSearchInteractor {
     }
 
 
-
     @Override
     public void getRecipe(String s, final OnSearchResponse response) {
-response.callback(new Recipe.Builder()
-                    .recipeId("recipe id")
-                    .ingredients(new ArrayList<String>(Arrays.asList("gluten free", "jenny craig", "starving orphans")))
-                    .name("name")
-                    .build());
+//response.callback(new Recipe.Builder()
+//                    .recipeId("recipe id")
+//                    .ingredients(new ArrayList<String>(Arrays.asList("gluten free", "jenny craig", "starving orphans")))
+//                    .name("name")
+//                    .build());
     }
 }
+
