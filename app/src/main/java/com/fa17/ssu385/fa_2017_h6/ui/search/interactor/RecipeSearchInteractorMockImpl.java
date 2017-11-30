@@ -11,7 +11,7 @@ import java.util.Arrays;
  * Created by Kurt on 11/25/17.
  */
 
-public class RecipeSearchInteractorMockImpl implements RecipeSearchInteractor {
+/*public class RecipeSearchInteractorMockImpl implements RecipeSearchInteractor {
     @Override
     public void getRecipe(String search, final OnSearchResponse responseAction) {
         responseAction.callback(new Recipe.Builder()
@@ -22,4 +22,4 @@ public class RecipeSearchInteractorMockImpl implements RecipeSearchInteractor {
         );
     }
 
-}
+}*/
