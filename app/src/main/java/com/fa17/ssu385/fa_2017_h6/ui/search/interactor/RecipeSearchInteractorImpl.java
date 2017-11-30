@@ -8,25 +8,19 @@ import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
  * Created by ryanpetit787 on 11/14/17.
  */
 
-public class RecipeSearchInteractorImpl implements RecipeSearchInteractor{
-    private OnSearchResponse responseListener;
-
-    public void setResponseListener(OnSearchResponse responseListener) {
-        this.responseListener = responseListener;
-    }
+public class RecipeSearchInteractorImpl implements RecipeSearchInteractor {
 
     @Override
-    public void getRecipe(String search, final OnSearchResponse searchResponse) {
+    public void getRecipe(String searchParam, final OnSearchResponse onSearchResponse) {
         RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
 
         task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
             @Override
             public void onCallback(RecipeList recipeList) {
-                Recipe recipe = recipeList.getRecipes().get(0);
-                searchResponse.callback(recipe);
+                onSearchResponse.callback(recipeList);
             }
         });
 
-        task.execute(search);
+        task.execute(searchParam);
     }
 }
