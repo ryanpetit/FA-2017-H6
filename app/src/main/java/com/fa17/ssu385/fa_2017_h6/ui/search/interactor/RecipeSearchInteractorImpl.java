@@ -21,14 +21,14 @@ public class RecipeSearchInteractorImpl implements RecipeSearchInteractor {
     }
 
     @Override
-    public void getRecipe(String string, OnSearchResponse listener) {
+    public void getRecipeList(String string, OnSearchResponse listener) {
     RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
     this.setResponseListener(listener);
     task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
         @Override
         public void onCallback(RecipeList recipeList) {
-            Recipe recipe = recipeList.getRecipes().get(0);
-            responseListener.callback(recipe);
+//            Recipe recipe = recipeList.getRecipes().get(0);
+            responseListener.callback(recipeList);
         }
     });
 
