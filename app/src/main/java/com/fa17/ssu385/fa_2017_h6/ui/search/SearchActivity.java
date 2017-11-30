@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,7 +18,10 @@ import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SearchView {
+
+    private RecipeSearchInteractor interactor;
+    private SearchPresenter presenter;
 
     // Butterknife used to bind view elements
     @BindView(R.id.my_search_button)
@@ -39,26 +43,21 @@ public class SearchActivity extends AppCompatActivity {
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
 
+        interactor = new RecipeSearchInteractorMockImpl();
+        presenter = new SearchPresenter (this, interactor);
+
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RecipeSearchAsyncTask task = new RecipeSearchAsyncTask();
+                presenter.getResults(searchInput.getText().toString());
 
-                task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
-                    @Override
-                    public void onCallback(RecipeList recipeList) {
-                        Recipe result = recipeList.getRecipes().get(0);
-
-                        Glide.with(SearchActivity.this)
-                                .load(result.getThumbnailSources().get(0))
-                                .into(recipeThumbnail);
-
-                        recipeName.setText(result.getName());
-                    }
-                });
-
-                task.execute(searchInput.getText().toString());
             }
         });
+    }
+    @Override
+    public void displayResult(Recipe result) {
+        recipeName.setText(result.getName());
+
     }
 }
