@@ -49,7 +49,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
         //interactor = new RecipeSearchInteractorImpl();
-        interactor = new RecipeSearchInteractorMockImpl();
+        interactor = new RecipeSearchInteractorImpl();
         presenter = new SearchPresenter(this, interactor);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
