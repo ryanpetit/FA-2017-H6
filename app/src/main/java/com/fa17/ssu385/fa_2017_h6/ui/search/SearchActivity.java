@@ -61,12 +61,10 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     @Override
     public void displayResult(Recipe result) {
-        recipeThumbnail = (ImageView)findViewById(R.id.recipe_thumbnail);
-        recipeName = (TextView)findViewById(R.id.recipe_name);
         recipeName.setText(result.getName());
-//        Glide.with(this)
-//             .load(result.getThumbnailSources().get(0))
-//             .into(recipeThumbnail);
+        Glide.with(this)
+             .load(result.getThumbnailSources().get(0))
+             .into(recipeThumbnail);
     }
 }
 
