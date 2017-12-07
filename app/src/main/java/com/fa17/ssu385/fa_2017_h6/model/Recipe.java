@@ -3,6 +3,7 @@ package com.fa17.ssu385.fa_2017_h6.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class Recipe {
@@ -20,6 +21,9 @@ public class Recipe {
 
     @SerializedName("smallImageUrls")
     private ArrayList<String> thumbnailSources;
+
+    @SerializedName("totalTimeInSeconds")
+    private int totalTime;
 
     public String getName() {
         return name;
@@ -39,6 +43,10 @@ public class Recipe {
 
     public ArrayList<String> getThumbnailSources() {
         return thumbnailSources;
+    }
+
+    public int getTotalTime(){
+        return totalTime;
     }
 
     public static class Builder {
@@ -73,11 +81,15 @@ public class Recipe {
             return this;
         }
 
+        public Builder totalTime(int time){
+            recipe.totalTime = time;
+            return this;
+        }
+
         public Recipe build() {
             Recipe val = this.recipe;
             recipe = null;
             return val;
         }
     }
-
 }
