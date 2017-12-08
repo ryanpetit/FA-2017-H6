@@ -43,21 +43,13 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
     @BindView(R.id.search_input)
     public EditText searchInput;
 
-    @BindView(R.id.recipe_thumbnail)
-    public ImageView recipeThumbnail;
-
-    @BindView(R.id.recipe_name)
-    public TextView recipeName;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
-        interactor = new RecipeSearchInteractorMockImpl();
+        interactor = new RecipeSearchInteractorImpl();
         presenter = new SearchPresenter(this, interactor);
         linearLayoutManager = new LinearLayoutManager(this);
         recipeResultList = (RecyclerView) findViewById(R.id.recipe_result_list);
@@ -73,7 +65,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView {
 
     @Override
     public void displayResults(RecipeList list) {
-        Log.d("DISPLAYRESULTs", "HERE");
         adapter = new RecipeSearchAdapter(list.getRecipes());
         adapter.setRecipeItemClickListener(new RecipeSearchAdapter.RecipeItemClickListener() {
             @Override
