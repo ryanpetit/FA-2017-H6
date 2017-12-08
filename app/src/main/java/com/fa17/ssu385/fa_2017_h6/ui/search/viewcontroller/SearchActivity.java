@@ -1,5 +1,6 @@
 package com.fa17.ssu385.fa_2017_h6.ui.search.viewcontroller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,17 +11,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
 import com.fa17.ssu385.fa_2017_h6.network.RecipeSearchAsyncTask;
 import com.fa17.ssu385.fa_2017_h6.ui.search.adapter.RecipeSearchAdapter;
+import com.fa17.ssu385.fa_2017_h6.ui.search.detail.viewcontroller.RecipeDetailActivity;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractor;
 import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorImpl;
-import com.fa17.ssu385.fa_2017_h6.ui.search.interactor.RecipeSearchInteractorMockImpl;
 import com.fa17.ssu385.fa_2017_h6.ui.search.presenter.SearchPresenter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.view.SearchView;
+
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,8 +57,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
         //  required call to bind when using Butterknife
         ButterKnife.bind(this);
 
-        interactor = new RecipeSearchInteractorMockImpl();
-        //interactor = new RecipeSearchInteractorImpl();
+        interactor = new RecipeSearchInteractorImpl();
         presenter = new SearchPresenter(this, interactor);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -70,8 +71,12 @@ public class SearchActivity extends AppCompatActivity implements SearchView{
 
 
     @Override
-    public void displayResult(Recipe recipe) {
-        recipeName.setText(recipe.getName());
+    public void displayResult(RecipeList recipeList) {
+        //recipeName.setText(recipe.getName());
         //Glide.with(this).load(recipe.getThumbnailSources().get(0)).into(recipeThumbnail);
+        adapter = new RecipeSearchAdapter(recipeList.getRecipes());
+        adapter.setRecipeItemClickListener();
+
+
     }
 }

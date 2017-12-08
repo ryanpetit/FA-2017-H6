@@ -32,7 +32,7 @@ public class RecipeDetailActivity extends AppCompatActivity{
         Recipe recipe = Parcels.unwrap(getIntent().getParcelableExtra(RECIPE_EXTRA_KEY));
         recipeDetailName.setText(recipe.getName());
         recipeDescription.setText(recipe.getSource());
-        Glide.with(this).load(recipe.getThumbnailSources().get(0).into(recipeDetailImage));
+        Glide.with(this).load(recipe.getThumbnailSources().get(0)).into(recipeDetailImage);
 
     }
 }
