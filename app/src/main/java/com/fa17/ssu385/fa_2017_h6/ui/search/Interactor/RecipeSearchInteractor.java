@@ -8,4 +8,3 @@ public interface RecipeSearchInteractor{
     }
     void getRecipe(String string, OnSearchResponse response);
 }
-
