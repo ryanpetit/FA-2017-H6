@@ -2,9 +2,12 @@ package com.fa17.ssu385.fa_2017_h6.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 
 
+@Parcel
 public class Recipe {
     @SerializedName("recipeName")
     private String name;
@@ -20,9 +23,6 @@ public class Recipe {
 
     @SerializedName("smallImageUrls")
     private ArrayList<String> thumbnailSources;
-
-    @SerializedName("totalTimeInSeconds")
-    private String time;
 
     public String getName() {
         return name;
@@ -42,10 +42,6 @@ public class Recipe {
 
     public ArrayList<String> getThumbnailSources() {
         return thumbnailSources;
-    }
-
-    public String getTime() {
-        return time;
     }
 
     public static class Builder {
@@ -77,11 +73,6 @@ public class Recipe {
 
         public Builder thumbnailSources(ArrayList<String> thumbnailSources) {
             recipe.thumbnailSources = thumbnailSources;
-            return this;
-        }
-
-        public Builder time(String time) {
-            recipe.time = time;
             return this;
         }
 
