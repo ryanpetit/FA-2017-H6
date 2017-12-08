@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.fa17.ssu385.fa_2017_h6.R;
 import com.fa17.ssu385.fa_2017_h6.model.Recipe;
 import com.fa17.ssu385.fa_2017_h6.model.RecipeList;
+import com.fa17.ssu385.fa_2017_h6.network.RecipeApi;
 import com.fa17.ssu385.fa_2017_h6.ui.search.Adapter.RecipeSearchAdapter;
 import com.fa17.ssu385.fa_2017_h6.ui.search.Interactor.RecipeSearchInteractor;
 import com.fa17.ssu385.fa_2017_h6.ui.search.Interactor.RecipeSearchInteractorImpl;
@@ -28,6 +29,11 @@ import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity implements SearchView {
     RecipeSearchInteractor interactor;
