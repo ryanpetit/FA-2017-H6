@@ -11,4 +11,3 @@ public interface RecipeSearchInteractor {
     void getRecipe(String search, OnSearchResponse searchResponse);
 
 }
-
