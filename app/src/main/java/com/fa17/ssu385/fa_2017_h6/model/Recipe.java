@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-
 public class Recipe {
     @SerializedName("recipeName")
     private String name;
@@ -14,6 +13,9 @@ public class Recipe {
 
     @SerializedName("id")
     private String recipeId;
+
+    @SerializedName("totalTimeInSeconds")
+    private int timeInSeconds;
 
     @SerializedName("ingredients")
     private ArrayList<String> ingredients;
@@ -31,6 +33,10 @@ public class Recipe {
 
     public String getRecipeId() {
         return recipeId;
+    }
+
+    public int getTimeInSeconds() {
+        return timeInSeconds;
     }
 
     public ArrayList<String> getIngredients() {
@@ -60,6 +66,11 @@ public class Recipe {
 
         public Builder recipeId(String id) {
             recipe.recipeId = id;
+            return this;
+        }
+
+        public Builder timeInSeconds(int totalTimeInSeconds) {
+            recipe.timeInSeconds = totalTimeInSeconds;
             return this;
         }
 
